@@ -10,18 +10,18 @@
 </head>
 <style type="text/css">
 #slide-box{
-  max-width: 800px;
+  max-width: 900px;
+  min-width: 200px;
   overflow: hidden;
   margin: 4em;
-  transition: transform .1s cubic-bezier(.175,.885,.32,1.275),-webkit-transform .3s cubic-bezier(.175,.885,.32,1.275);
 }
-
 #slide-box ul{
   position: relative;
   display: flex;
   align-items: center;
 }
 #slide-box ul li{
+  margin: 0 20px;
   list-style-type: none;
 }
 #slide-box ul li img,
@@ -37,25 +37,27 @@
 </div>
   <script type="text/javascript">
 jQuery(document).ready(function($){
-  setInterval(function () {
-      moveRight();
-  }, 3000);
-  var BoxWidth = $("#slide-box").width();
-  var BoxHeight = $("#slide-box").height();
-  var SlideCount = $("#slide-box ul li").length;
-  $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxHeight});
   function moveRight(){
-      $('#slide-box ul').animate({
-          left: - BoxWidth
-      }, 300, function () {
-          $('#slide-box ul li:first-child').appendTo('#slide-box ul');
-          $('#slide-box ul').css('left', '');
-      });
+    $('#slide-box ul').animate({
+      left: - BoxWidth
+    }, 300, function () {
+      $('#slide-box ul li:first-child').appendTo('#slide-box ul');
+      $('#slide-box ul').css('left', '');
+    });
   };
+  setInterval(function () {
+    moveRight();
+  }, 3000);
   $(window).resize(function(){
     BoxWidth = $("#slide-box").width();
-    $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxHeight});
+    $("#slide-box").css({height:BoxWidth/2});
+    BoxWidth = $("#slide-box").width();
+    $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxWidth/2});
   });
+  // main()
+  var BoxWidth = $("#slide-box").width();
+  var SlideCount = $("#slide-box ul li").length;
+  $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxWidth/2});
 });
 
 
