@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+<style type="text/css">
+#slide-box{
+  max-width: 800px;
+  overflow: hidden;
+  margin: 4em;
+  transition: transform .1s cubic-bezier(.175,.885,.32,1.275),-webkit-transform .3s cubic-bezier(.175,.885,.32,1.275);
+}
+
+#slide-box ul{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#slide-box ul li{
+  list-style-type: none;
+}
+#slide-box ul li img,
+#slide-box ul li{width: 100%;}
+</style>
+<body>
+<div id="slide-box">
+  <ul>
+    <li><img src="img/img-1.jpg" alt=""></li>
+    <li><img src="img/img-2.jpg" alt=""></li>
+    <li><img src="img/img-3.jpg" alt=""></li>
+  </ul>
+</div>
+  <script type="text/javascript">
+jQuery(document).ready(function($){
+  setInterval(function () {
+      moveRight();
+  }, 3000);
+  var BoxWidth = $("#slide-box").width();
+  var BoxHeight = $("#slide-box").height();
+  var SlideCount = $("#slide-box ul li").length;
+  $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxHeight});
+  function moveRight(){
+      $('#slide-box ul').animate({
+          left: - BoxWidth
+      }, 300, function () {
+          $('#slide-box ul li:first-child').appendTo('#slide-box ul');
+          $('#slide-box ul').css('left', '');
+      });
+  };
+  $(window).resize(function(){
+    BoxWidth = $("#slide-box").width();
+    $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxHeight});
+  });
+});
+
+
+  </script>
+</body>
+</html>
