@@ -42,6 +42,15 @@ body{
 </div>
   <script type="text/javascript">
 jQuery(document).ready(function($){
+  // main()
+  var BoxWidth = $("#slide-box").width();
+  var SlideCount = $("#slide-box ul li").length;
+  $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxWidth/2});
+  //time to change img..
+  setInterval(function () {
+    moveRight();
+  }, 3000);//3sec
+  //fun() to img ride-side...
   function moveRight(){
     $('#slide-box ul').animate({
       left: - BoxWidth
@@ -50,19 +59,13 @@ jQuery(document).ready(function($){
       $('#slide-box ul').css('left', '');
     });
   };
-  setInterval(function () {
-    moveRight();
-  }, 3000);
+  //for responsive slide-box
   $(window).resize(function(){
     BoxWidth = $("#slide-box").width();
     $("#slide-box").css({height:BoxWidth/2});
     BoxWidth = $("#slide-box").width();
     $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxWidth/2});
   });
-  // main()
-  var BoxWidth = $("#slide-box").width();
-  var SlideCount = $("#slide-box ul li").length;
-  $("#slide-box ul").css({width:BoxWidth*SlideCount,height:BoxWidth/2});
 });
 
 
