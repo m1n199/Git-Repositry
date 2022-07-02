@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style type="text/css">
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat;
+  background: #1a1f39;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotatez(-90deg);
+}
+
+.time {
+  position: relative;
+  width: 100%;
+  color: white;
+  line-height: 350px;
+  text-align: center;
+  font-size: 20px;
+}
+
+</style>
+<body>
+  <div class="clock">
+    <div class="time">Hello, world!</div>
+    <div class="hour">
+        <canvas class="circle" data-number="12"></canvas>
+    </div>
+    <div class="minute">
+        <canvas class="circle" data-number="60"></canvas>
+    </div>
+    <div class="second">
+        <canvas class="circle" data-number="61000"></canvas>
+    </div>
+    <script type="text/javascript">
+    const hour = document.querySelector(".hour");
+const minute = document.querySelector(".minute");
+const second = document.querySelector(".second");
+const time = document.querySelector(".time");
+
+setInterval(() => {
+  const date = new Date();
+
+  let hh = date.getHours();
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+  if (hh >= 12) {
+      hh = hh - 12;
+  }
+  time.textContent = date.toLocaleTimeString();
+  hour.setAttribute("data-number", hh + mm / 60);
+  minute.setAttribute("data-number", mm + ss / 60);
+  second.setAttribute("data-number", ss * 1000 + date.getMilliseconds());
+  const circles = document.querySelectorAll(".circle");
+//function for circle canvas ?
+  function drawCircle(circle, color, strokeWidth, radius) {
+      circle.width = window.innerWidth;
+      circle.height = window.innerHeight;
+      let max_value = circle.dataset.number;
+      let actual_value = circle.parentNode.dataset.number;
+      let angle = (actual_value / max_value) * 2 * Math.PI;
+      const ctx = circle.getContext("2d");
+      ctx.beginPath();
+      ctx.arc(circle.width / 2, circle.height / 2, radius, 0, angle, false);
+      ctx.lineCap = "round";
+      ctx.strokeStyle = color;
+      ctx.lineWidth = strokeWidth;
+      ctx.stroke();
+  }
+
+  drawCircle(circles[0], "orangered", 8, 100);
+  drawCircle(circles[1], "lime", 8, 80);
+  drawCircle(circles[2], "dodgerblue", 8, 60);
+  // circle, length, color, strokeWidth, radius
+}, 200);//decrease this interval for more smooth circle for second
+        // NOTE: value must be greater than 60 or 70
+        // NOTE: to reduce RAM use
+
+    </script>
+</div>
+</body>
+</html>
