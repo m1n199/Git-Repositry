@@ -7,42 +7,19 @@
   <title>Document</title>
 </head>
 <style type="text/css">
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Montserrat;
-  background: #1a1f39;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.clock {
+body{background: #1a1f39; overflow: hidden;}
+.clock,.hour,.minute,.second{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 350px;
-  height: 350px;
+  transform: translate(-50%, -50%) ;
 }
-
-.circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotatez(-90deg);
+.hour,.minute,.second{transform: translate(-50%, -50%) rotatez(-90deg);}
+.time{ color: white; font-size: 20px;}
+.clock{
+  /* top: 150px; */
+  /* left: 150px; */
 }
-
-.time {
-  position: relative;
-  width: 100%;
-  color: white;
-  line-height: 350px;
-  text-align: center;
-  font-size: 20px;
-}
-
 </style>
 <body>
   <div class="clock">
@@ -64,13 +41,10 @@ const time = document.querySelector(".time");
 
 setInterval(() => {
   const date = new Date();
-
   let hh = date.getHours();
   let mm = date.getMinutes();
   let ss = date.getSeconds();
-  if (hh >= 12) {
-      hh = hh - 12;
-  }
+  if (hh >= 12) hh = hh - 12;
   time.textContent = date.toLocaleTimeString();
   hour.setAttribute("data-number", hh + mm / 60);
   minute.setAttribute("data-number", mm + ss / 60);
@@ -91,15 +65,12 @@ setInterval(() => {
       ctx.lineWidth = strokeWidth;
       ctx.stroke();
   }
-
-  drawCircle(circles[0], "orangered", 8, 100);
-  drawCircle(circles[1], "lime", 8, 80);
-  drawCircle(circles[2], "dodgerblue", 8, 60);
+  drawCircle(circles[0], "orangered", 5, 80);
+  drawCircle(circles[1], "lime", 4, 70);
+  drawCircle(circles[2], "dodgerblue", 3, 60);
   // circle, length, color, strokeWidth, radius
 }, 200);//decrease this interval for more smooth circle for second
-        // NOTE: value must be greater than 60 or 70
-        // NOTE: to reduce RAM use
-
+        // NOTE: value must be greater than 60 or 70 to reduce RAM use
     </script>
 </div>
 </body>
