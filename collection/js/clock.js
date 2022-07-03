@@ -9,11 +9,6 @@ clock.innerHTML = `<div class="time">hh:mm:ss</div>
                     <div class="second">
                         <canvas class="circle" data-number="61000"/>
                     </div>`;
-clock.style.top = clock.dataset.x;
-clock.style.left = clock.dataset.y;
-clock.style.background = clock.dataset.bg;
-
-
 const hour = document.querySelector(".hour");
 const minute = document.querySelector(".minute");
 const second = document.querySelector(".second");
